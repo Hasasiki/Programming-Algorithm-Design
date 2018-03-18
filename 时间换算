@@ -1,0 +1,91 @@
+7-8 时间换算（15 分）
+本题要求编写程序，以hh:mm:ss的格式输出某给定时间再过n秒后的时间值（超过23:59:59就从0点开始计时）。
+输入格式：
+
+输入在第一行中以hh:mm:ss的格式给出起始时间，第二行给出整秒数n（<60）。
+输出格式：
+
+输出在一行中给出hh:mm:ss格式的结果时间。
+输入样例：
+
+11:59:40
+30
+输出样例：
+
+12:00:10
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		String time = in.nextLine();
+		int pass = in.nextInt();
+		List<Integer> list = new ArrayList();
+		for(String timePatch : time.split(":")){
+			list.add(Integer.parseInt(timePatch));
+		}
+		if(((pass+list.get(2))> 60)&&(list.get(1)<59)){
+			if((list.get(0) == 0)&&(list.get(1) == 0)){
+				System.out.println("00:01:"+ (list.get(2)+pass-60));
+			}
+			else if((list.get(0)==0)&&(list.get(1)<10)){
+				System.out.println("00:0"+ (list.get(1)+1) + ":" + (list.get(2)+pass-60));
+			}
+			else if((list.get(0)<10)&&(list.get(1)<10)){
+				System.out.println("0"+list.get(0)+"0:0"+ (list.get(1)+1) + ":" + (list.get(2)+pass-60));
+			}
+			else if(list.get(1)==0){
+				System.out.println(list.get(0) + ":0" + (list.get(1)+1) + ":" + (list.get(2)+pass-60));
+			}
+			else{
+				System.out.println(list.get(0) + ":" + (list.get(1)+1) + ":" + (list.get(2)+pass-60));
+			}
+		}
+		else if(((pass+list.get(2))> 60)&&(list.get(1)==59)){
+			if((list.get(0) == 0)&&(list.get(1) == 0)){
+				System.out.println("01:00:"+ (list.get(2)+pass-60));
+			}
+			else if((list.get(0)==0)&&(list.get(1)<10)){
+				System.out.println("01:00"+ ":" + (list.get(2)+pass-60));
+			}
+			else if(list.get(0)<10){
+				System.out.println("0"+(list.get(0)+1) + ":00:"  + (list.get(2)+pass-60));
+			}
+			else{
+				System.out.println((list.get(0)+1) + ":00:"  + (list.get(2)+pass-60));
+			}
+		}
+		else{
+			if((list.get(0) == 0)&&(list.get(1) == 0)){
+				System.out.println("00:00:"+ (list.get(2)+pass-60));
+			}
+			else if((list.get(0)==0)&&(list.get(1)<10)){
+				System.out.println("00:0"+ (list.get(1)+1) + ":" + (list.get(2)+pass));
+			}
+			else if((list.get(0)<10)&&(list.get(1)<10)){
+				System.out.println("0"+list.get(0)+"0:0"+ list.get(1) + ":" + (list.get(2)+pass));
+			}
+			
+			else{
+				System.out.println(list.get(0) + ":" + list.get(1) + ":" + (list.get(2)+pass));
+			}
+		}
+		/*else{
+			int sec = pass%60;
+			int min = (pass - sec)/60;
+			System.out.println();
+		}
+		*/
+	}
+
+}
